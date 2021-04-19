@@ -12,6 +12,6 @@ public class Util {
 //        PersonDao personDao = (PersonDao) EJBFactory.getPersonDaoBean();
 //        return personDao.retrievePersonNameById(14);
         StudentDao studentDao = (StudentDao) EJBFactory.getStudentDaoBean();
-        return studentDao.retrieveStudentById(3);
+        return studentDao.retrieveStudentById(1);
     }
 }

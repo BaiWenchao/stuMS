@@ -2,7 +2,7 @@ package ejb.dao;
 
 public interface StudentDao {
 
-    public int createStudent(String name, boolean sex, String tel, String birthday);
+    public int createStudent(String stuNum, String name, boolean sex, String birthday);
 
     public int deleteStudentById(int id);
 

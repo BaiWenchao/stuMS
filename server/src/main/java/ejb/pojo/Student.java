@@ -9,9 +9,9 @@ import java.util.Date;
 @Table(name = "Students")
 public class Student implements Serializable {
     private Integer id;
+    private String stuNum;
     private String name;
     private boolean sex;
-    private String tel;
     private Date birthday;
 
     @Id
@@ -39,12 +39,12 @@ public class Student implements Serializable {
         this.sex = sex;
     }
 
-    @Column(nullable = false, length = 20)
-    public String getTel() {
-        return tel;
+    @Column(nullable = false, length = 20, unique = true)
+    public String getStuNum() {
+        return stuNum;
     }
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setStuNum(String stuNum) {
+        this.stuNum = stuNum;
     }
 
     @Temporal(value = TemporalType.DATE)

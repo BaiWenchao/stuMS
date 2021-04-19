@@ -19,9 +19,8 @@ public class StudentDaoBean implements StudentDao {
 
 
     @Override
-    public int createStudent(String name, boolean sex, String tel, String birthday) {
-        String sql = "INSERT INTO STUDENTS VALUE (" + null + ", " + wrapField(name) + ", " + sex + ", " + wrapField(tel)
-                + ", " + wrapField(birthday)  + ")";
+    public int createStudent(String stuNum, String name, boolean sex, String birthday) {
+        String sql = "INSERT INTO STUDENTS VALUE (" + null  + ", " + wrapField(stuNum) + ", " + wrapField(name) + ", " + sex + ", " + wrapField(birthday)  + ")";
         Query query = em.createNativeQuery(sql);
         return query.executeUpdate();
     }
@@ -37,7 +36,7 @@ public class StudentDaoBean implements StudentDao {
     public int updateStudentById(int id, String field, Object val) {
         String sql;
         field = field.toUpperCase(Locale.ROOT);
-        if (field.equals("NAME") || field.equals("BIRTHDAY") || field.equals("TEL")) {
+        if (field.equals("NAME") || field.equals("BIRTHDAY") || field.equals("StuNum")) {
             // STRING CASE
             sql = "UPDATE STUDENTS SET " + field + " = " + wrapField((String)val) + " WHERE ID = " + id;
         } else {
@@ -57,9 +56,9 @@ public class StudentDaoBean implements StudentDao {
     public String retrieveStudentById(int id) {
         Student student = em.find(Student.class, id);
         return student.getId()+
+                ","+student.getStuNum()+
                 ","+student.getName()+
                 ","+student.isSex()+
-                ","+student.getTel()+
                 ","+student.getBirthday();
     }
 
