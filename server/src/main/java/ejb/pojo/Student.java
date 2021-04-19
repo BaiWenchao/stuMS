@@ -1,5 +1,7 @@
 package ejb.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -49,10 +51,20 @@ public class Student implements Serializable {
 
     @Temporal(value = TemporalType.DATE)
     @Column(nullable = false)
+    @JSONField(format = "yyyy-MM-dd")
     public Date getBirthday() {
         return birthday;
     }
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return this.getId()+
+                ","+this.getStuNum()+
+                ","+this.getName()+
+                ","+this.isSex()+
+                ","+this.getBirthday();
     }
 }

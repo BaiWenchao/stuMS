@@ -2,12 +2,16 @@ package ejb.dao.impl;
 
 import ejb.dao.PersonDao;
 import ejb.pojo.Person;
+import ejb.pojo.Student;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 @Stateless(name = "PersonDaoBean")
@@ -53,6 +57,21 @@ public class PersonDaoBean implements PersonDao {
     public String retrievePersonNameById(int id) {
         Person person = em.find(Person.class, id);
         return person.getName();
+    }
+
+    @Override
+    public List<String> retrieveAllPeople() {
+        List<String> stringList = new ArrayList<>();
+        String sql = "SELECT * FROM PERSON";
+        Query query = em.createNativeQuery(sql);
+        List result = query.getResultList();
+        Iterator iterator = result.iterator();
+        Person person;
+        while(iterator.hasNext()) {
+            person = (Person) iterator.next();
+            stringList.add(person.toString());
+        }
+        return stringList;
     }
 
     private String wrapField(String field) {

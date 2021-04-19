@@ -1,5 +1,6 @@
 package ejb.dao.impl;
 
+import com.alibaba.fastjson.JSON;
 import ejb.dao.StudentDao;
 import ejb.pojo.Student;
 
@@ -8,6 +9,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 @Stateless(name = "StudentDaoBean")
@@ -55,12 +62,35 @@ public class StudentDaoBean implements StudentDao {
     @Override
     public String retrieveStudentById(int id) {
         Student student = em.find(Student.class, id);
-        return student.getId()+
-                ","+student.getStuNum()+
-                ","+student.getName()+
-                ","+student.isSex()+
-                ","+student.getBirthday();
+        return JSON.toJSONString(student);
     }
+
+    @Override
+    public String retrieveAllStudents() {
+        List<Student> studentList = new ArrayList<>();
+        String sql = "SELECT * FROM STUDENTS";
+        Query query = em.createNativeQuery(sql);
+        List result = query.getResultList();
+        Iterator iterator = result.iterator();
+        Student student;
+        while(iterator.hasNext()) {
+            student = new Student();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Object[] obj = (Object[]) iterator.next();
+            student.setId(Integer.parseInt(obj[0].toString()));
+            student.setStuNum(obj[1].toString());
+            student.setName(obj[2].toString());
+            student.setSex(Boolean.parseBoolean(obj[3].toString()));
+            try {
+                student.setBirthday(format.parse(obj[4].toString()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            studentList.add(student);
+        }
+        return JSON.toJSONString(studentList);
+    }
+
 
     private String wrapField(String field) {
         return "\'" + field + "\'";

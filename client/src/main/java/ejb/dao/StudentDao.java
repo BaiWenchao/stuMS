@@ -1,5 +1,7 @@
 package ejb.dao;
 
+import java.util.List;
+
 public interface StudentDao {
 
     public int createStudent(String stuNum, String name, boolean sex, String birthday);
@@ -11,4 +13,6 @@ public interface StudentDao {
     public String retrieveStudentNameById(int id);
 
     public String retrieveStudentById(int id);
+
+    public String retrieveAllStudents();
 }

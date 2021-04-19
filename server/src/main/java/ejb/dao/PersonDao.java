@@ -1,5 +1,7 @@
 package ejb.dao;
 
+import java.util.List;
+
 public interface PersonDao {
     /*========================增========================*/
     /*
@@ -28,4 +30,6 @@ public interface PersonDao {
     * 按照personID查找用户姓名
     * */
     public String retrievePersonNameById(int id);
+
+    public List<String> retrieveAllPeople();
 }

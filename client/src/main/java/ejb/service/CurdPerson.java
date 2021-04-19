@@ -4,6 +4,7 @@ import ejb.dao.PersonDao;
 import ejb.factory.EJBFactory;
 
 import javax.naming.NamingException;
+import java.util.List;
 
 public class CurdPerson {
     public static void main(String[] args) throws NamingException {
@@ -30,6 +31,11 @@ public class CurdPerson {
         /*
         * 根据personID查找person姓名
         * */
-        System.out.println(personDao.retrievePersonNameById(14));
+        // System.out.println(personDao.retrievePersonNameById(14));
+
+        List<String> stringList = personDao.retrieveAllPeople();
+        for (String s : stringList) {
+            System.out.println(s);
+        }
     }
 }
