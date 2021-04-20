@@ -62,7 +62,7 @@ public class HelloServlet extends HttpServlet {
         String phoneNum = strArr[3].substring(12,strArr[3].length()-1);
         System.out.println(phoneNum);
 //        性别
-        String birthday = strArr[4].substring(12,strArr[4].length()-1);
+        String birthday = strArr[4].substring(12,strArr[4].length()-2);
         System.out.println(birthday);
 
     }

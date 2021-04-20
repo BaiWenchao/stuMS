@@ -16,11 +16,56 @@
         <!--        访问的地址 工程路径/资源路径-->
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddStuServlet</servlet-name>
+        <servlet-class>ejb.servlet.studentServlet.AddStuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddStuServlet</servlet-name>
+        <url-pattern>/addStu</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DelStuServlet</servlet-name>
+        <servlet-class>ejb.servlet.studentServlet.DelStuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DelStuServlet</servlet-name>
+        <url-pattern>/delStu</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateStuServlet</servlet-name>
+        <servlet-class>ejb.servlet.studentServlet.UpdateStuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateStuServlet</servlet-name>
+        <url-pattern>/updateStu</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>ejb.servlet.utilServlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoadStuServlet</servlet-name>
+        <servlet-class>ejb.servlet.studentServlet.LoadStuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoadStuServlet</servlet-name>
+        <url-pattern>/loadStu</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>CORSFilter</filter-name>
         <filter-class>ejb.filter.CORSFilter</filter-class>
     </filter>
-
     <filter-mapping>
         <filter-name>CORSFilter</filter-name>
         <url-pattern>/*</url-pattern>

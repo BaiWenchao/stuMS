@@ -9,7 +9,7 @@ import java.util.Locale;
 
 public class CurdStudent {
     public static void main(String[] args) throws NamingException {
-        StudentDao studentDao = (StudentDao) EJBFactory.getStudentDaoBean();
+        // StudentDao studentDao = (StudentDao) EJBFactory.getStudentDaoBean();
         // 增
         // System.out.println(studentDao.createStudent("20185085T","Wenchao Bai", true,  "19991216"));
         // 删
@@ -17,14 +17,19 @@ public class CurdStudent {
         // 改
         // System.out.println(studentDao.updateStudentById(1, "NAME", "Jetlipse"));
         // System.out.println(studentDao.updateStudentById(6, "SEX", false));
+
         // 查
         // System.out.println(studentDao.retrieveStudentNameById(1));
         // System.out.println(studentDao.retrieveStudentById(1));
-        System.out.println(studentDao.retrieveAllStudents());
+        // System.out.println(studentDao.retrieveAllStudents());
+        test(9, "20185085T","Wenchao Bai", true,  "19991216");
     }
 
-    private static void test(String stuNum, String name, boolean sex, String birthday) {
-        String sql = "INSERT INTO STUDENTS VALUE (" + null  + ", " + wrapField(stuNum) + ", " + wrapField(name) + ", " + sex + ", " + wrapField(birthday)  + ")";
+    private static void test(Integer id, String stuNum, String name, boolean sex, String birthday) {
+        String sql = "UPDATE STUDENTS SET STUNUM = " + wrapField(stuNum)
+                + ", NAME = " + wrapField(name)
+                + ", SEX = " + sex
+                + ", BIRTHDAY = " + birthday + " WHERE ID = " + id;
         System.out.println(sql);
     }
 

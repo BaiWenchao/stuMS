@@ -26,8 +26,8 @@ public class StudentDaoBean implements StudentDao {
 
 
     @Override
-    public int createStudent(String stuNum, String name, boolean sex, String birthday) {
-        String sql = "INSERT INTO STUDENTS VALUE (" + null  + ", " + wrapField(stuNum) + ", " + wrapField(name) + ", " + sex + ", " + wrapField(birthday)  + ")";
+    public int createStudent(Integer id, String stuNum, String name, boolean sex, String birthday) {
+        String sql = "INSERT INTO STUDENTS VALUE (" + id  + ", " + wrapField(stuNum) + ", " + wrapField(name) + ", " + sex + ", " + wrapField(birthday)  + ")";
         Query query = em.createNativeQuery(sql);
         return query.executeUpdate();
     }
@@ -49,6 +49,16 @@ public class StudentDaoBean implements StudentDao {
         } else {
             sql = "UPDATE STUDENTS SET " + field + " = " + val + " WHERE ID = " + id;
         }
+        Query query = em.createNativeQuery(sql);
+        return query.executeUpdate();
+    }
+
+    @Override
+    public int updateStudentById(Integer id, String stuNum, String name, boolean sex, String birthday) {
+        String sql = "UPDATE STUDENTS SET STUNUM = " + wrapField(stuNum)
+                + ", NAME = " + wrapField(name)
+                + ", SEX = " + sex
+                + ", BIRTHDAY = " + wrapField(birthday) + " WHERE ID = " + id;
         Query query = em.createNativeQuery(sql);
         return query.executeUpdate();
     }

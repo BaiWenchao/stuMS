@@ -1,5 +1,6 @@
 package ejb.factory;
 
+import ejb.dao.AdminDao;
 import ejb.dao.PersonDao;
 import ejb.dao.StudentDao;
 
@@ -26,6 +27,16 @@ public class EJBFactory {
         String distinctName = "";
         String beanName = "StudentDaoBean";
         String viewClassName = StudentDao.class.getName();
+        return getRemoteBean(appName, moduleName, distinctName, beanName, viewClassName);
+    }
+
+    public static Object getAdminDaoBean() throws NamingException {
+        // 路径配置
+        String appName = "";
+        String moduleName = "server-1.0-SNAPSHOT";
+        String distinctName = "";
+        String beanName = "AdminDaoBean";
+        String viewClassName = AdminDao.class.getName();
         return getRemoteBean(appName, moduleName, distinctName, beanName, viewClassName);
     }
 
