@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class AddStuServlet extends HttpServlet {
     @Override
@@ -21,6 +22,8 @@ public class AddStuServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter writer = resp.getWriter();
         StudentService studentService = null;
         try {
             studentService = new StudentService();
@@ -36,6 +39,10 @@ public class AddStuServlet extends HttpServlet {
         }
         String stuInfo = stringBuilder.toString();
         System.out.println(stuInfo);
-        System.out.println(studentService.createStudent(stuInfo));
+        if (studentService.createStudent(stuInfo) == -1) {
+            writer.write("true");
+        } else {
+            writer.write("false");
+        }
     }
 }

@@ -9,7 +9,7 @@ import java.util.Locale;
 
 public class CurdStudent {
     public static void main(String[] args) throws NamingException {
-        // StudentDao studentDao = (StudentDao) EJBFactory.getStudentDaoBean();
+        StudentDao studentDao = (StudentDao) EJBFactory.getStudentDaoBean();
         // 增
         // System.out.println(studentDao.createStudent("20185085T","Wenchao Bai", true,  "19991216"));
         // 删
@@ -22,7 +22,11 @@ public class CurdStudent {
         // System.out.println(studentDao.retrieveStudentNameById(1));
         // System.out.println(studentDao.retrieveStudentById(1));
         // System.out.println(studentDao.retrieveAllStudents());
-        test(9, "20185085T","Wenchao Bai", true,  "19991216");
+        try {
+            System.out.println(studentDao.retrieveStudentIdByStuNum("20183333"));
+        } catch (Exception e) {
+            System.out.println("get it");
+        }
     }
 
     private static void test(Integer id, String stuNum, String name, boolean sex, String birthday) {

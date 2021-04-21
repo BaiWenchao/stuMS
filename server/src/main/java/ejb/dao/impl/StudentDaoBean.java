@@ -76,6 +76,15 @@ public class StudentDaoBean implements StudentDao {
     }
 
     @Override
+    public Integer retrieveStudentIdByStuNum(String stuNum) {
+        String sql = "SELECT ID FROM STUDENTS WHERE STUNUM = " + wrapField(stuNum);
+        Query query = em.createNativeQuery(sql);
+        List result = query.getResultList();
+        Iterator iterator = result.iterator();
+        return iterator == null ? null : Integer.parseInt(iterator.next().toString());
+    }
+
+    @Override
     public String retrieveAllStudents() {
         List<Student> studentList = new ArrayList<>();
         String sql = "SELECT * FROM STUDENTS";

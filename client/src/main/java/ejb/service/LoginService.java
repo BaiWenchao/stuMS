@@ -16,6 +16,11 @@ public class LoginService {
 
     public boolean validation(String adminInfo) {
         Admin admin = JsonService.parseAdmin(adminInfo);
-        return adminDao.retrievePwdByUsername(admin.getUsername()).equals(admin.getPassword());
+        try {
+            return adminDao.retrievePwdByUsername(admin.getUsername()).equals(admin.getPassword());
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 }

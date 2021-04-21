@@ -16,5 +16,7 @@ public interface StudentDao {
 
     public String retrieveStudentById(int id);
 
+    public Integer retrieveStudentIdByStuNum(String stuNum);
+
     public String retrieveAllStudents();
 }

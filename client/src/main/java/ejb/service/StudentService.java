@@ -15,12 +15,30 @@ public class StudentService {
 
     public int createStudent(String stuInfo) {
         Student student = JsonService.parseStudent(stuInfo);
-        return studentDao.createStudent(student.getId(), student.getStuNum(), student.getName(), student.isSex(), student.getBirthday());
+
+        try {
+            studentDao.retrieveStudentIdByStuNum(student.getStuNum());
+            return 1;
+        } catch (Exception e) {
+            studentDao.createStudent(student.getId(), student.getStuNum(), student.getName(), student.isSex(), student.getBirthday());
+            return -1;
+        }
     }
 
     public int updateStudent(String stuInfo) {
         Student student = JsonService.parseStudent(stuInfo);
-        return studentDao.updateStudentById(student.getId(), student.getStuNum(), student.getName(), student.isSex(), student.getBirthday());
+
+        try {
+            int id = studentDao.retrieveStudentIdByStuNum(student.getStuNum());
+            if (id == student.getId()) {
+                studentDao.updateStudentById(student.getId(), student.getStuNum(), student.getName(), student.isSex(), student.getBirthday());
+                return -1;
+            }
+            return 1;
+        } catch (Exception e) {
+            studentDao.updateStudentById(student.getId(), student.getStuNum(), student.getName(), student.isSex(), student.getBirthday());
+            return -1;
+        }
     }
 
     public String retrieveAllStudents() {
